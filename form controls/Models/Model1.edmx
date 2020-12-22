@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="30" />
+          <Property Name="authors" Type="varchar" MaxLength="30" />
+          <Property Name="publisher" Type="varchar" MaxLength="30" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="borrowed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="memb_no" Type="varchar" MaxLength="30" />
+          <Property Name="isbn" Type="varchar" MaxLength="30" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="memb_no" />
+          </Key>
+          <Property Name="memb_no" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
+          <Property Name="countryid" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="startingDate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\PROJECTS\FORM CONTROLS\FORM CONTROLS\APP_DATA\LIBRARY.MDF.dbo.exercise7' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="exercise7">
+          <Key>
+            <PropertyRef Name="memb_no" />
+          </Key>
+          <Property Name="memb_no" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_borrowed_book">
+          <End Role="book" Type="Self.book" Multiplicity="0..1" />
+          <End Role="borrowed" Type="Self.borrowed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="borrowed">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_country">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="member" Type="Self.member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryModelStoreContainer">
+          <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="borrowed" EntityType="Self.borrowed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="exercise7" EntityType="Self.exercise7" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [exercise7].[memb_no] AS [memb_no], 
+    [exercise7].[name] AS [name]
+    FROM [dbo].[exercise7] AS [exercise7]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_borrowed_book" Association="Self.FK_borrowed_book">
+            <End Role="book" EntitySet="book" />
+            <End Role="borrowed" EntitySet="borrowed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_country" Association="Self.FK_member_country">
+            <End Role="country" EntitySet="country" />
+            <End Role="member" EntitySet="member" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="authors" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="borroweds" Relationship="Self.FK_borrowed_book" FromRole="book" ToRole="borrowed" />
+        </EntityType>
+        <EntityType Name="borrowed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="isbn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="book" Relationship="Self.FK_borrowed_book" FromRole="borrowed" ToRole="book" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="members" Relationship="Self.FK_member_country" FromRole="country" ToRole="member" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="memb_no" />
+          </Key>
+          <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="countryid" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="startingDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="country" Relationship="Self.FK_member_country" FromRole="member" ToRole="country" />
+        </EntityType>
+        <EntityType Name="exercise7">
+          <Key>
+            <PropertyRef Name="memb_no" />
+          </Key>
+          <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_borrowed_book">
+          <End Role="book" Type="Self.book" Multiplicity="0..1" />
+          <End Role="borrowed" Type="Self.borrowed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="book">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="borrowed">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_country">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="member" Type="Self.member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="member">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="books" EntityType="Self.book" />
+          <EntitySet Name="borroweds" EntityType="Self.borrowed" />
+          <EntitySet Name="countries" EntityType="Self.country" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="exercise7" EntityType="Self.exercise7" />
+          <AssociationSet Name="FK_borrowed_book" Association="Self.FK_borrowed_book">
+            <End Role="book" EntitySet="books" />
+            <End Role="borrowed" EntitySet="borroweds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_country" Association="Self.FK_member_country">
+            <End Role="country" EntitySet="countries" />
+            <End Role="member" EntitySet="members" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntities">
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="LibraryModel.book">
+              <MappingFragment StoreEntitySet="book">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="authors" ColumnName="authors" />
+                <ScalarProperty Name="publisher" ColumnName="publisher" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="borroweds">
+            <EntityTypeMapping TypeName="LibraryModel.borrowed">
+              <MappingFragment StoreEntitySet="borrowed">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countries">
+            <EntityTypeMapping TypeName="LibraryModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="country1" ColumnName="country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="LibraryModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exercise7">
+            <EntityTypeMapping TypeName="LibraryModel.exercise7">
+              <MappingFragment StoreEntitySet="exercise7">
+                <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

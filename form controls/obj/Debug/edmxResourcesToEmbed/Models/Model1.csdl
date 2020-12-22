@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="isbn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="authors" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="borroweds" Relationship="Self.FK_borrowed_book" FromRole="book" ToRole="borrowed" />
+  </EntityType>
+  <EntityType Name="borrowed">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="isbn" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="book" Relationship="Self.FK_borrowed_book" FromRole="borrowed" ToRole="book" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="members" Relationship="Self.FK_member_country" FromRole="country" ToRole="member" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="memb_no" />
+    </Key>
+    <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="countryid" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="startingDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="country" Relationship="Self.FK_member_country" FromRole="member" ToRole="country" />
+  </EntityType>
+  <EntityType Name="exercise7">
+    <Key>
+      <PropertyRef Name="memb_no" />
+    </Key>
+    <Property Name="memb_no" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_borrowed_book">
+    <End Role="book" Type="Self.book" Multiplicity="0..1" />
+    <End Role="borrowed" Type="Self.borrowed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="isbn" />
+      </Principal>
+      <Dependent Role="borrowed">
+        <PropertyRef Name="isbn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_member_country">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="member" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="member">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="books" EntityType="Self.book" />
+    <EntitySet Name="borroweds" EntityType="Self.borrowed" />
+    <EntitySet Name="countries" EntityType="Self.country" />
+    <EntitySet Name="members" EntityType="Self.member" />
+    <EntitySet Name="exercise7" EntityType="Self.exercise7" />
+    <AssociationSet Name="FK_borrowed_book" Association="Self.FK_borrowed_book">
+      <End Role="book" EntitySet="books" />
+      <End Role="borrowed" EntitySet="borroweds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_member_country" Association="Self.FK_member_country">
+      <End Role="country" EntitySet="countries" />
+      <End Role="member" EntitySet="members" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

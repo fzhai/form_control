@@ -1,0 +1,37 @@
+D:\Projects\form controls\form controls\bin\roslyn\csc.exe
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Projects\form controls\form controls\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Projects\form controls\form controls\bin\roslyn\System.Collections.Immutable.dll
+D:\Projects\form controls\form controls\bin\roslyn\System.Reflection.Metadata.dll
+D:\Projects\form controls\form controls\bin\roslyn\vbc.exe
+D:\Projects\form controls\form controls\bin\roslyn\VBCSCompiler.exe
+D:\Projects\form controls\form controls\bin\roslyn\VBCSCompiler.exe.config
+D:\Projects\form controls\form controls\bin\form controls.dll.config
+D:\Projects\form controls\form controls\bin\form controls.dll
+D:\Projects\form controls\form controls\bin\form controls.pdb
+D:\Projects\form controls\form controls\bin\EntityFramework.dll
+D:\Projects\form controls\form controls\bin\EntityFramework.SqlServer.dll
+D:\Projects\form controls\form controls\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Projects\form controls\form controls\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\form controls\form controls\bin\System.Web.Helpers.dll
+D:\Projects\form controls\form controls\bin\System.Web.Mvc.dll
+D:\Projects\form controls\form controls\bin\System.Web.Razor.dll
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.Deployment.dll
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.dll
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.Razor.dll
+D:\Projects\form controls\form controls\bin\EntityFramework.xml
+D:\Projects\form controls\form controls\bin\EntityFramework.SqlServer.xml
+D:\Projects\form controls\form controls\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Projects\form controls\form controls\bin\System.Web.Razor.xml
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.xml
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.Deployment.xml
+D:\Projects\form controls\form controls\bin\System.Web.Webpages.Razor.xml
+D:\Projects\form controls\form controls\bin\System.Web.Helpers.xml
+D:\Projects\form controls\form controls\bin\System.Web.Mvc.xml
+D:\Projects\form controls\form controls\obj\Debug\form controls.csprojResolveAssemblyReference.cache
+D:\Projects\form controls\form controls\obj\Debug\form controls.dll
+D:\Projects\form controls\form controls\obj\Debug\form controls.pdb

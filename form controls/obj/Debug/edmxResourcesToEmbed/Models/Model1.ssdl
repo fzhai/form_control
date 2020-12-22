@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="isbn" />
+    </Key>
+    <Property Name="isbn" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="30" />
+    <Property Name="authors" Type="varchar" MaxLength="30" />
+    <Property Name="publisher" Type="varchar" MaxLength="30" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="borrowed">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memb_no" Type="varchar" MaxLength="30" />
+    <Property Name="isbn" Type="varchar" MaxLength="30" />
+    <Property Name="date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="memb_no" />
+    </Key>
+    <Property Name="memb_no" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" />
+    <Property Name="gender" Type="varchar" MaxLength="10" />
+    <Property Name="countryid" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="startingDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'D:\PROJECTS\FORM CONTROLS\FORM CONTROLS\APP_DATA\LIBRARY.MDF.dbo.exercise7' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="exercise7">
+    <Key>
+      <PropertyRef Name="memb_no" />
+    </Key>
+    <Property Name="memb_no" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_borrowed_book">
+    <End Role="book" Type="Self.book" Multiplicity="0..1" />
+    <End Role="borrowed" Type="Self.borrowed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="isbn" />
+      </Principal>
+      <Dependent Role="borrowed">
+        <PropertyRef Name="isbn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_member_country">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="member" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="member">
+        <PropertyRef Name="countryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LibraryModelStoreContainer">
+    <EntitySet Name="book" EntityType="Self.book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="borrowed" EntityType="Self.borrowed" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="exercise7" EntityType="Self.exercise7" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [exercise7].[memb_no] AS [memb_no], 
+    [exercise7].[name] AS [name]
+    FROM [dbo].[exercise7] AS [exercise7]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_borrowed_book" Association="Self.FK_borrowed_book">
+      <End Role="book" EntitySet="book" />
+      <End Role="borrowed" EntitySet="borrowed" />
+    </AssociationSet>
+    <AssociationSet Name="FK_member_country" Association="Self.FK_member_country">
+      <End Role="country" EntitySet="country" />
+      <End Role="member" EntitySet="member" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

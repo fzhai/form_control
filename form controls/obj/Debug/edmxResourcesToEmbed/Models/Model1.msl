@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntities">
+    <EntitySetMapping Name="books">
+      <EntityTypeMapping TypeName="LibraryModel.book">
+        <MappingFragment StoreEntitySet="book">
+          <ScalarProperty Name="isbn" ColumnName="isbn" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="authors" ColumnName="authors" />
+          <ScalarProperty Name="publisher" ColumnName="publisher" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="borroweds">
+      <EntityTypeMapping TypeName="LibraryModel.borrowed">
+        <MappingFragment StoreEntitySet="borrowed">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+          <ScalarProperty Name="isbn" ColumnName="isbn" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="countries">
+      <EntityTypeMapping TypeName="LibraryModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="country1" ColumnName="country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="members">
+      <EntityTypeMapping TypeName="LibraryModel.member">
+        <MappingFragment StoreEntitySet="member">
+          <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="exercise7">
+      <EntityTypeMapping TypeName="LibraryModel.exercise7">
+        <MappingFragment StoreEntitySet="exercise7">
+          <ScalarProperty Name="memb_no" ColumnName="memb_no" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
